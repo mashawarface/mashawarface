@@ -392,12 +392,8 @@
         <div class="bubble" style="left: 75%; animation-duration: 5s; width: 6px; height: 6px; animation-delay: 3s;"></div>
         <div class="bubble" style="left: 85%; animation-duration: 7s; width: 13px; height: 13px; animation-delay: 1.5s;"></div>
         
-        <!-- Подпись -->
-        <div class="signature">Обновляется при каждом обновлении страницы! ✨</div>
       </div>
     </body>
   </foreignObject>
   
-  <!-- Альтернативный текст для SVG -->
-  <text x="-1000" y="-1000">Анимированный аквариум с плавающими рыбками. Для просмотра анимации обновите страницу.</text>
 </svg>
