@@ -3,7 +3,7 @@
   <defs>
     <style type="text/css">
       <![CDATA[
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
         
         * {
           margin: 0;
@@ -12,319 +12,668 @@
         }
         
         body {
-          font-family: 'Comic Neue', cursive;
           overflow: hidden;
           width: 800px;
           height: 400px;
-          background: linear-gradient(to bottom, #1e90ff 0%, #87ceeb 40%, #00bfff 100%);
+          background: linear-gradient(to bottom, 
+            #1e90ff 0%, 
+            #4a9eff 20%,
+            #87ceeb 40%, 
+            #6ab7e6 60%,
+            #00bfff 100%
+          );
           position: relative;
         }
         
-        /* Аквариум */
+        /* Аквариум с градиентом глубины */
         .aquarium {
           width: 100%;
           height: 100%;
           position: relative;
           border-radius: 15px;
           overflow: hidden;
-          box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.5);
+          box-shadow: 
+            inset 0 0 80px rgba(0, 50, 100, 0.5),
+            0 15px 40px rgba(0, 0, 0, 0.4);
         }
         
-        /* Поверхность воды */
+        /* Эффект световых лучей */
+        .light-rays {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: 
+            linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%),
+            linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+          animation: rays-move 20s infinite linear;
+        }
+        
+        @keyframes rays-move {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(400px); }
+        }
+        
+        /* Поверхность воды с пеной */
         .water-surface {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
-          height: 20px;
-          background: rgba(135, 206, 235, 0.6);
-          animation: water-ripple 4s infinite ease-in-out;
-        }
-        
-        @keyframes water-ripple {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(5px); }
+          height: 25px;
+          background: 
+            linear-gradient(to bottom, 
+              rgba(135, 206, 235, 0.8) 0%,
+              rgba(135, 206, 235, 0.4) 50%,
+              rgba(135, 206, 235, 0.2) 100%
+            );
+          animation: water-ripple 5s infinite ease-in-out;
         }
         
         /* Рыбки */
         .fish {
           position: absolute;
-          filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
+          filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+          z-index: 2;
         }
         
-        /* Тело рыбки */
         .fish-body {
           position: relative;
           border-radius: 50% 40% 40% 50%;
         }
         
-        /* Хвост */
         .fish-tail {
           position: absolute;
           right: -10px;
           top: 50%;
           transform: translateY(-50%);
           border-radius: 50%;
-          animation: tail-wag 0.5s infinite alternate;
+          animation: tail-wag 0.6s infinite alternate;
         }
         
         @keyframes tail-wag {
-          0% { transform: translateY(-50%) scaleX(1); }
-          100% { transform: translateY(-50%) scaleX(0.8); }
-        }
-        
-        /* Глаз */
-        .fish-eye {
-          position: absolute;
-          width: 6px;
-          height: 6px;
-          background: white;
-          border-radius: 50%;
-          top: 30%;
-          left: 15%;
-        }
-        
-        .fish-eye::after {
-          content: '';
-          position: absolute;
-          width: 3px;
-          height: 3px;
-          background: black;
-          border-radius: 50%;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+          0% { transform: translateY(-50%) scaleX(1) rotate(0deg); }
+          100% { transform: translateY(-50%) scaleX(0.7) rotate(5deg); }
         }
         
         /* Типы рыбок */
         .clownfish {
-          width: 70px;
-          height: 30px;
-          background: linear-gradient(to right, #FF6B35, #FFA500);
+          width: 75px;
+          height: 32px;
+          background: 
+            linear-gradient(45deg, 
+              #FF4500 0%,
+              #FF6B35 30%,
+              #FFA500 70%,
+              #FFD700 100%
+            );
+          border: 2px solid #FF8C00;
         }
         
         .clownfish .fish-tail {
-          width: 15px;
-          height: 20px;
-          background: #FF4500;
+          width: 18px;
+          height: 24px;
+          background: linear-gradient(to right, #FF4500, #FF8C00);
         }
         
         .bluefish {
-          width: 60px;
-          height: 25px;
-          background: linear-gradient(to right, #1E90FF, #00BFFF);
+          width: 65px;
+          height: 28px;
+          background: 
+            radial-gradient(circle at 30% 50%, #00BFFF 0%, #1E90FF 70%);
+          border: 1px solid #1C86EE;
         }
         
         .bluefish .fish-tail {
-          width: 12px;
-          height: 18px;
-          background: #1C86EE;
+          width: 14px;
+          height: 20px;
+          background: linear-gradient(to right, #1C86EE, #00BFFF);
         }
         
         .goldfish {
-          width: 50px;
-          height: 22px;
-          background: linear-gradient(to right, #FFD700, #FFA500);
+          width: 55px;
+          height: 25px;
+          background: 
+            radial-gradient(circle at 30% 50%, #FFD700 0%, #FFA500 70%);
+          border: 2px solid #FF8C00;
         }
         
         .goldfish .fish-tail {
-          width: 10px;
-          height: 16px;
-          background: #FF8C00;
+          width: 12px;
+          height: 18px;
+          background: linear-gradient(to right, #FF8C00, #FFA500);
         }
         
-        /* Анимации плавания */
-        @keyframes swim1 {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(200px, 50px) rotate(15deg); }
-          50% { transform: translate(400px, -30px) rotate(-10deg); }
-          75% { transform: translate(600px, 40px) rotate(20deg); }
-          100% { transform: translate(800px, 0) rotate(0deg); }
+        /* Осьминог */
+        .octopus {
+          position: absolute;
+          bottom: 20px;
+          left: 100px;
+          width: 80px;
+          height: 80px;
+          background: radial-gradient(circle at 40% 40%, #9370DB, #8A2BE2);
+          border-radius: 50% 50% 50% 50%;
+          z-index: 3;
+          filter: drop-shadow(3px 5px 8px rgba(0, 0, 0, 0.4));
         }
         
-        @keyframes swim2 {
-          0% { transform: translate(800px, 100px) rotate(180deg); }
-          25% { transform: translate(600px, 150px) rotate(165deg); }
-          50% { transform: translate(400px, 70px) rotate(190deg); }
-          75% { transform: translate(200px, 160px) rotate(160deg); }
-          100% { transform: translate(0, 100px) rotate(180deg); }
+        .octopus-head {
+          position: absolute;
+          width: 100%;
+          height: 60%;
+          background: 
+            radial-gradient(circle at 30% 30%, #BA55D3, #9370DB);
+          border-radius: 50%;
+          top: 0;
+          left: 0;
+          animation: octopus-breathe 4s infinite ease-in-out;
         }
         
-        @keyframes swim3 {
-          0% { transform: translate(0, 250px) rotate(0deg); }
-          33% { transform: translate(300px, 200px) rotate(10deg); }
-          66% { transform: translate(500px, 280px) rotate(-5deg); }
-          100% { transform: translate(800px, 250px) rotate(0deg); }
+        @keyframes octopus-breathe {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
         }
         
-        @keyframes swim4 {
-          0% { transform: translate(800px, 300px) rotate(180deg); }
-          33% { transform: translate(500px, 250px) rotate(190deg); }
-          66% { transform: translate(300px, 320px) rotate(175deg); }
-          100% { transform: translate(0, 300px) rotate(180deg); }
+        .octopus-eye {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          background: white;
+          border-radius: 50%;
+          top: 25px;
+          border: 2px solid #4B0082;
         }
         
-        @keyframes swim5 {
-          0% { transform: translate(200px, 180px) rotate(0deg); }
-          50% { transform: translate(600px, 180px) rotate(0deg); }
-          100% { transform: translate(200px, 180px) rotate(0deg); }
+        .octopus-eye::after {
+          content: '';
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          background: #4B0082;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation: eye-move 5s infinite alternate;
         }
         
-        /* Применение анимаций к рыбкам */
-        .fish1 { animation: swim1 15s infinite linear; }
-        .fish2 { animation: swim2 18s infinite linear; }
-        .fish3 { animation: swim3 20s infinite linear; }
-        .fish4 { animation: swim4 22s infinite linear; }
-        .fish5 { animation: swim5 12s infinite linear alternate; }
+        @keyframes eye-move {
+          0% { transform: translate(-70%, -50%); }
+          100% { transform: translate(-30%, -50%); }
+        }
         
-        /* Декорации */
-        .plant {
+        .octopus-eye.left { left: 20px; }
+        .octopus-eye.right { right: 20px; }
+        
+        .octopus-tentacle {
           position: absolute;
           bottom: 0;
-          border-radius: 5px 5px 0 0;
+          background: linear-gradient(to top, #8A2BE2, #9370DB);
+          border-radius: 10px 10px 0 0;
+          animation: tentacle-wave 3s infinite ease-in-out;
         }
         
-        .plant1 {
-          left: 10%;
+        @keyframes tentacle-wave {
+          0%, 100% { transform: translateX(0); height: 30px; }
+          25% { transform: translateX(-5px); height: 35px; }
+          50% { transform: translateX(5px); height: 32px; }
+          75% { transform: translateX(-3px); height: 38px; }
+        }
+        
+        .tentacle1 { left: 10px; width: 10px; height: 30px; animation-delay: 0s; }
+        .tentacle2 { left: 25px; width: 8px; height: 35px; animation-delay: 0.2s; }
+        .tentacle3 { left: 38px; width: 9px; height: 32px; animation-delay: 0.4s; }
+        .tentacle4 { left: 52px; width: 7px; height: 38px; animation-delay: 0.6s; }
+        .tentacle5 { right: 52px; width: 7px; height: 36px; animation-delay: 0.8s; }
+        .tentacle6 { right: 38px; width: 9px; height: 33px; animation-delay: 1s; }
+        .tentacle7 { right: 25px; width: 8px; height: 37px; animation-delay: 1.2s; }
+        .tentacle8 { right: 10px; width: 10px; height: 31px; animation-delay: 1.4s; }
+        
+        /* Краб */
+        .crab {
+          position: absolute;
+          bottom: 10px;
+          right: 150px;
+          width: 40px;
+          height: 25px;
+          background: #DC143C;
+          border-radius: 50%;
+          z-index: 4;
+          animation: crab-walk 10s infinite alternate ease-in-out;
+          filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        @keyframes crab-walk {
+          0% { transform: translateX(0) rotate(0deg); }
+          25% { transform: translateX(20px) rotate(5deg); }
+          50% { transform: translateX(40px) rotate(0deg); }
+          75% { transform: translateX(20px) rotate(-5deg); }
+          100% { transform: translateX(0) rotate(0deg); }
+        }
+        
+        .crab-claw {
+          position: absolute;
           width: 15px;
+          height: 10px;
+          background: #B22222;
+          border-radius: 50% 50% 0 0;
+          top: -5px;
+          animation: claw-pinch 2s infinite;
+        }
+        
+        @keyframes claw-pinch {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+        
+        .claw-left { left: -10px; transform-origin: right center; }
+        .claw-right { right: -10px; transform-origin: left center; }
+        
+        .crab-leg {
+          position: absolute;
+          width: 5px;
+          height: 15px;
+          background: #B22222;
+          border-radius: 2px;
+          bottom: -10px;
+          animation: leg-move 1s infinite alternate;
+        }
+        
+        @keyframes leg-move {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-5px); }
+        }
+        
+        .leg1 { left: 5px; animation-delay: 0s; }
+        .leg2 { left: 15px; animation-delay: 0.2s; }
+        .leg3 { right: 15px; animation-delay: 0.4s; }
+        .leg4 { right: 5px; animation-delay: 0.6s; }
+        
+        /* Кораллы */
+        .coral {
+          position: absolute;
+          bottom: 0;
+          z-index: 1;
+        }
+        
+        .coral1 {
+          left: 50px;
+          width: 40px;
           height: 120px;
-          background: linear-gradient(to top, #3CB371, #2E8B57);
-          animation: plant-sway 4s infinite ease-in-out;
+          background: 
+            linear-gradient(to top, 
+              #FF69B4 0%,
+              #FF1493 30%,
+              #DB7093 70%,
+              #C71585 100%
+            );
+          border-radius: 20px 20px 0 0;
+          clip-path: polygon(
+            0% 100%, 20% 70%, 40% 90%, 60% 60%, 
+            80% 80%, 100% 100%, 80% 40%, 60% 20%, 
+            40% 50%, 20% 30%, 0% 40%
+          );
+          animation: coral-sway 8s infinite ease-in-out;
         }
         
-        .plant2 {
-          left: 30%;
-          width: 20px;
-          height: 150px;
-          background: linear-gradient(to top, #66CDAA, #20B2AA);
-          animation: plant-sway 3s infinite ease-in-out;
-          animation-delay: 0.5s;
+        .coral2 {
+          right: 80px;
+          width: 60px;
+          height: 90px;
+          background: 
+            linear-gradient(to top, 
+              #20B2AA 0%,
+              #48D1CC 30%,
+              #40E0D0 70%,
+              #00CED1 100%
+            );
+          border-radius: 30px 30px 0 0;
+          clip-path: polygon(
+            0% 100%, 30% 80%, 50% 100%, 70% 70%, 
+            100% 100%, 85% 50%, 60% 30%, 40% 60%, 
+            15% 40%, 0% 70%
+          );
+          animation: coral-sway 6s infinite ease-in-out reverse;
         }
         
-        .plant3 {
-          right: 20%;
-          width: 12px;
-          height: 130px;
-          background: linear-gradient(to top, #90EE90, #32CD32);
-          animation: plant-sway 5s infinite ease-in-out;
+        .coral3 {
+          left: 250px;
+          width: 35px;
+          height: 110px;
+          background: 
+            linear-gradient(to top, 
+              #9370DB 0%,
+              #8A2BE2 30%,
+              #9400D3 70%,
+              #8B008B 100%
+            );
+          border-radius: 15px 15px 0 0;
+          clip-path: polygon(
+            0% 100%, 25% 75%, 50% 95%, 75% 65%, 
+            100% 100%, 75% 45%, 50% 25%, 25% 55%, 
+            0% 35%
+          );
+          animation: coral-sway 7s infinite ease-in-out;
           animation-delay: 1s;
         }
         
-        @keyframes plant-sway {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(5px); }
+        @keyframes coral-sway {
+          0%, 100% { transform: translateX(0) skewY(0deg); }
+          33% { transform: translateX(5px) skewY(2deg); }
+          66% { transform: translateX(-5px) skewY(-2deg); }
         }
         
+        /* Больше водорослей */
+        .seaweed {
+          position: absolute;
+          bottom: 0;
+          background: linear-gradient(to top, #2E8B57, #3CB371);
+          border-radius: 5px 5px 0 0;
+          animation: seaweed-sway 4s infinite ease-in-out;
+        }
+        
+        @keyframes seaweed-sway {
+          0%, 100% { transform: skewX(0deg) translateX(0); }
+          50% { transform: skewX(3deg) translateX(3px); }
+        }
+        
+        .seaweed1 {
+          left: 15%;
+          width: 12px;
+          height: 140px;
+          animation-delay: 0s;
+          clip-path: polygon(
+            0% 100%, 30% 80%, 50% 100%, 70% 70%, 
+            100% 100%, 85% 40%, 60% 20%, 40% 50%, 
+            15% 30%, 0% 60%
+          );
+        }
+        
+        .seaweed2 {
+          left: 35%;
+          width: 18px;
+          height: 160px;
+          animation-delay: 0.3s;
+          background: linear-gradient(to top, #66CDAA, #20B2AA);
+          clip-path: polygon(
+            0% 100%, 20% 85%, 40% 100%, 60% 75%, 
+            80% 100%, 100% 85%, 80% 50%, 60% 30%, 
+            40% 55%, 20% 35%, 0% 65%
+          );
+        }
+        
+        .seaweed3 {
+          right: 25%;
+          width: 10px;
+          height: 130px;
+          animation-delay: 0.6s;
+          background: linear-gradient(to top, #90EE90, #32CD32);
+          clip-path: polygon(
+            0% 100%, 25% 75%, 50% 100%, 75% 70%, 
+            100% 100%, 75% 45%, 50% 25%, 25% 55%, 
+            0% 35%
+          );
+        }
+        
+        /* Камни и грунт */
         .rock {
           position: absolute;
           bottom: 0;
-          border-radius: 10px 10px 0 0;
+          border-radius: 15px 15px 0 0;
+          z-index: 1;
         }
         
         .rock1 {
           left: 20%;
-          width: 70px;
-          height: 50px;
-          background: linear-gradient(to top, #A9A9A9, #696969);
+          width: 80px;
+          height: 55px;
+          background: 
+            linear-gradient(45deg, 
+              #A9A9A9 0%,
+              #808080 30%,
+              #696969 70%,
+              #778899 100%
+            );
+          box-shadow: 
+            inset 5px 5px 10px rgba(255, 255, 255, 0.1),
+            inset -5px -5px 10px rgba(0, 0, 0, 0.3);
         }
         
         .rock2 {
-          right: 10%;
-          width: 90px;
-          height: 60px;
-          background: linear-gradient(to top, #C0C0C0, #808080);
+          right: 12%;
+          width: 100px;
+          height: 65px;
+          background: 
+            linear-gradient(-45deg, 
+              #C0C0C0 0%,
+              #A9A9A9 30%,
+              #808080 70%,
+              #708090 100%
+            );
+          border-radius: 20px 20px 0 0;
+          box-shadow: 
+            inset 3px 3px 8px rgba(255, 255, 255, 0.1),
+            inset -3px -3px 8px rgba(0, 0, 0, 0.3);
         }
         
+        /* Сундук с сокровищами */
         .treasure {
           position: absolute;
-          bottom: 0;
-          right: 30%;
+          bottom: 5px;
+          right: 35%;
+          width: 45px;
+          height: 30px;
+          background: 
+            linear-gradient(45deg, 
+              #FFD700 0%,
+              #FFA500 30%,
+              #FF8C00 70%,
+              #FF4500 100%
+            );
+          border-radius: 8px;
+          z-index: 2;
+          transform: perspective(100px) rotateX(20deg);
+          box-shadow: 
+            0 5px 15px rgba(255, 215, 0, 0.4),
+            inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+        }
+        
+        .treasure-lid {
+          position: absolute;
+          top: -8px;
+          left: 5px;
           width: 35px;
-          height: 25px;
-          background: linear-gradient(45deg, #FFD700, #FFA500);
-          border-radius: 5px;
+          height: 10px;
+          background: linear-gradient(45deg, #FFA500, #FF8C00);
+          border-radius: 5px 5px 0 0;
+          transform: rotateX(-30deg);
+          transform-origin: bottom;
+          animation: lid-move 5s infinite ease-in-out;
+        }
+        
+        @keyframes lid-move {
+          0%, 100% { transform: rotateX(-30deg); }
+          50% { transform: rotateX(-10deg); }
         }
         
         .treasure::after {
           content: '';
           position: absolute;
-          top: -12px;
-          left: 12px;
-          width: 8px;
-          height: 12px;
-          background: #FFA500;
+          top: -15px;
+          left: 18px;
+          width: 10px;
+          height: 15px;
+          background: #FF8C00;
           border-radius: 3px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
-        /* Пузырьки */
+        /* Монетки рядом с сундуком */
+        .coin {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
+          border-radius: 50%;
+          bottom: 10px;
+          z-index: 1;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          animation: coin-sparkle 2s infinite;
+        }
+        
+        @keyframes coin-sparkle {
+          0%, 100% { opacity: 0.7; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .coin1 { right: 32%; animation-delay: 0s; }
+        .coin2 { right: 34%; animation-delay: 0.5s; }
+        .coin3 { right: 36%; animation-delay: 1s; }
+        .coin4 { right: 38%; bottom: 15px; animation-delay: 1.5s; }
+        
+        /* Пузырьки разных размеров */
         .bubble {
           position: absolute;
-          background: rgba(255, 255, 255, 0.3);
+          background: 
+            radial-gradient(circle at 30% 30%, 
+              rgba(255, 255, 255, 0.8) 0%,
+              rgba(200, 230, 255, 0.4) 70%,
+              transparent 100%
+            );
           border-radius: 50%;
           animation: bubble-rise linear infinite;
+          box-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.5),
+            inset 0 0 10px rgba(255, 255, 255, 0.3);
         }
         
         @keyframes bubble-rise {
           0% {
-            transform: translateY(0) scale(0.5);
-            opacity: 0.7;
+            transform: translateY(0) scale(0.3) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.8;
+          }
+          90% {
+            opacity: 0.8;
           }
           100% {
-            transform: translateY(-400px) scale(1.2);
+            transform: translateY(-450px) scale(1.5) rotate(180deg);
             opacity: 0;
           }
         }
         
-        /* Заголовок */
-        .title {
+        /* Планктон (мелкие частицы) */
+        .plankton {
           position: absolute;
-          top: 30px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-family: 'Fredoka One', cursive;
-          font-size: 24px;
-          color: white;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          background: rgba(0, 0, 0, 0.3);
-          padding: 8px 20px;
-          border-radius: 20px;
-          z-index: 10;
-          animation: title-glow 3s infinite alternate;
+          width: 3px;
+          height: 3px;
+          background: rgba(255, 255, 200, 0.6);
+          border-radius: 50%;
+          animation: plankton-float 10s infinite linear;
         }
         
-        @keyframes title-glow {
-          0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-          100% { box-shadow: 0 0 20px rgba(30, 144, 255, 0.8); }
+        @keyframes plankton-float {
+          0% {
+            transform: translate(0, 0);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translate(100px, -200px);
+            opacity: 0;
+          }
         }
         
-        /* Подпись */
-        .signature {
-          position: absolute;
-          bottom: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.8);
-          background: rgba(0, 0, 0, 0.2);
-          padding: 5px 15px;
-          border-radius: 10px;
+        /* Анимации плавания для рыбок */
+        @keyframes swim-diagonal {
+          0% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(180px, 80px) rotate(15deg); }
+          50% { transform: translate(360px, 20px) rotate(-10deg); }
+          75% { transform: translate(540px, 100px) rotate(20deg); }
+          100% { transform: translate(720px, 0) rotate(0deg); }
         }
+        
+        @keyframes swim-sinus {
+          0% { transform: translate(800px, 120px) rotate(180deg); }
+          25% { transform: translate(600px, 180px) rotate(165deg); }
+          50% { transform: translate(400px, 90px) rotate(190deg); }
+          75% { transform: translate(200px, 160px) rotate(160deg); }
+          100% { transform: translate(0, 120px) rotate(180deg); }
+        }
+        
+        @keyframes swim-figure8 {
+          0% { transform: translate(0, 200px) rotate(0deg); }
+          25% { transform: translate(200px, 150px) rotate(45deg); }
+          50% { transform: translate(400px, 200px) rotate(0deg); }
+          75% { transform: translate(600px, 250px) rotate(-45deg); }
+          100% { transform: translate(800px, 200px) rotate(0deg); }
+        }
+        
+        @keyframes swim-circle {
+          0% { transform: translate(600px, 280px) rotate(0deg); }
+          25% { transform: translate(650px, 230px) rotate(90deg); }
+          50% { transform: translate(600px, 180px) rotate(180deg); }
+          75% { transform: translate(550px, 230px) rotate(270deg); }
+          100% { transform: translate(600px, 280px) rotate(360deg); }
+        }
+        
+        @keyframes swim-zigzag {
+          0% { transform: translate(100px, 300px) rotate(0deg); }
+          20% { transform: translate(250px, 250px) rotate(30deg); }
+          40% { transform: translate(400px, 300px) rotate(0deg); }
+          60% { transform: translate(550px, 250px) rotate(-30deg); }
+          80% { transform: translate(700px, 300px) rotate(0deg); }
+          100% { transform: translate(100px, 300px) rotate(0deg); }
+        }
+        
+        /* Применение анимаций */
+        .fish1 { animation: swim-diagonal 25s infinite linear; }
+        .fish2 { animation: swim-sinus 30s infinite linear; }
+        .fish3 { animation: swim-figure8 35s infinite linear; }
+        .fish4 { animation: swim-circle 40s infinite linear; }
+        .fish5 { animation: swim-zigzag 45s infinite linear; }
         
         /* Адаптация для темной темы */
         @media (prefers-color-scheme: dark) {
           body {
-            background: linear-gradient(to bottom, #0c2461 0%, #1e3799 40%, #0a3d62 100%);
+            background: linear-gradient(to bottom, 
+              #0c2461 0%, 
+              #1a1a2e 30%,
+              #16213e 60%,
+              #0a3d62 100%
+            );
           }
           
-          .title {
-            color: #4dffea;
+          .light-rays {
+            background: 
+              linear-gradient(45deg, transparent 30%, rgba(100, 150, 255, 0.08) 50%, transparent 70%),
+              linear-gradient(-45deg, transparent 30%, rgba(100, 150, 255, 0.05) 50%, transparent 70%);
+          }
+          
+          .clownfish, .bluefish, .goldfish {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)) 
+                   brightness(1.1) 
+                   drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
           }
         }
         
-        /* Адаптация для пользователей с уменьшенной анимацией */
+        /* Доступность - отключение анимаций */
         @media (prefers-reduced-motion: reduce) {
-          .fish, .plant, .bubble, .title {
+          *, ::before, ::after {
             animation: none !important;
+            transition: none !important;
+          }
+          
+          .fish-tail {
+            transform: translateY(-50%) scaleX(0.8);
           }
         }
       ]]>
@@ -334,66 +683,107 @@
   <foreignObject width="800" height="400" x="0" y="0">
     <body xmlns="http://www.w3.org/1999/xhtml">
       <div class="aquarium">
+        <!-- Световые лучи -->
+        <div class="light-rays"></div>
+        
         <!-- Поверхность воды -->
         <div class="water-surface"></div>
         
-        <!-- Заголовок -->
-        <div class="title">🐠 Мой виртуальный аквариум 🐠</div>
-        
         <!-- Рыбки -->
         <div class="fish fish1">
-          <div class="fish-body clownfish">
-            <div class="fish-eye"></div>
-          </div>
+          <div class="fish-body clownfish"></div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish2">
-          <div class="fish-body bluefish">
-            <div class="fish-eye"></div>
-          </div>
+          <div class="fish-body bluefish"></div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish3">
-          <div class="fish-body goldfish">
-            <div class="fish-eye"></div>
-          </div>
+          <div class="fish-body goldfish"></div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish4">
-          <div class="fish-body clownfish">
-            <div class="fish-eye"></div>
-          </div>
+          <div class="fish-body clownfish"></div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish5">
-          <div class="fish-body bluefish">
-            <div class="fish-eye"></div>
-          </div>
+          <div class="fish-body bluefish"></div>
           <div class="fish-tail"></div>
         </div>
         
-        <!-- Декорации -->
-        <div class="plant plant1"></div>
-        <div class="plant plant2"></div>
-        <div class="plant plant3"></div>
+        <!-- Осьминог -->
+        <div class="octopus">
+          <div class="octopus-head">
+            <div class="octopus-eye left"></div>
+            <div class="octopus-eye right"></div>
+          </div>
+          <div class="octopus-tentacle tentacle1"></div>
+          <div class="octopus-tentacle tentacle2"></div>
+          <div class="octopus-tentacle tentacle3"></div>
+          <div class="octopus-tentacle tentacle4"></div>
+          <div class="octopus-tentacle tentacle5"></div>
+          <div class="octopus-tentacle tentacle6"></div>
+          <div class="octopus-tentacle tentacle7"></div>
+          <div class="octopus-tentacle tentacle8"></div>
+        </div>
+        
+        <!-- Краб -->
+        <div class="crab">
+          <div class="crab-claw claw-left"></div>
+          <div class="crab-claw claw-right"></div>
+          <div class="crab-leg leg1"></div>
+          <div class="crab-leg leg2"></div>
+          <div class="crab-leg leg3"></div>
+          <div class="crab-leg leg4"></div>
+        </div>
+        
+        <!-- Кораллы -->
+        <div class="coral coral1"></div>
+        <div class="coral coral2"></div>
+        <div class="coral coral3"></div>
+        
+        <!-- Водоросли -->
+        <div class="seaweed seaweed1"></div>
+        <div class="seaweed seaweed2"></div>
+        <div class="seaweed seaweed3"></div>
+        
+        <!-- Камни -->
         <div class="rock rock1"></div>
         <div class="rock rock2"></div>
-        <div class="treasure"></div>
+        
+        <!-- Сундук с сокровищами -->
+        <div class="treasure">
+          <div class="treasure-lid"></div>
+        </div>
+        
+        <!-- Монетки -->
+        <div class="coin coin1"></div>
+        <div class="coin coin2"></div>
+        <div class="coin coin3"></div>
+        <div class="coin coin4"></div>
         
         <!-- Пузырьки -->
-        <div class="bubble" style="left: 15%; animation-duration: 6s; width: 12px; height: 12px;"></div>
-        <div class="bubble" style="left: 25%; animation-duration: 8s; width: 8px; height: 8px; animation-delay: 1s;"></div>
-        <div class="bubble" style="left: 40%; animation-duration: 7s; width: 15px; height: 15px; animation-delay: 2s;"></div>
-        <div class="bubble" style="left: 60%; animation-duration: 9s; width: 10px; height: 10px; animation-delay: 0.5s;"></div>
-        <div class="bubble" style="left: 75%; animation-duration: 5s; width: 6px; height: 6px; animation-delay: 3s;"></div>
-        <div class="bubble" style="left: 85%; animation-duration: 7s; width: 13px; height: 13px; animation-delay: 1.5s;"></div>
+        <div class="bubble" style="left: 10%; animation-duration: 8s; width: 18px; height: 18px; animation-delay: 0s;"></div>
+        <div class="bubble" style="left: 20%; animation-duration: 6s; width: 12px; height: 12px; animation-delay: 1s;"></div>
+        <div class="bubble" style="left: 35%; animation-duration: 10s; width: 25px; height: 25px; animation-delay: 2s;"></div>
+        <div class="bubble" style="left: 50%; animation-duration: 7s; width: 15px; height: 15px; animation-delay: 0.5s;"></div>
+        <div class="bubble" style="left: 65%; animation-duration: 9s; width: 20px; height: 20px; animation-delay: 3s;"></div>
+        <div class="bubble" style="left: 80%; animation-duration: 5s; width: 10px; height: 10px; animation-delay: 1.5s;"></div>
+        <div class="bubble" style="left: 90%; animation-duration: 11s; width: 22px; height: 22px; animation-delay: 2.5s;"></div>
+        
+        <!-- Планктон -->
+        <div class="plankton" style="left: 15%; top: 100px; animation-delay: 0s;"></div>
+        <div class="plankton" style="left: 45%; top: 150px; animation-delay: 2s;"></div>
+        <div class="plankton" style="left: 75%; top: 80px; animation-delay: 4s;"></div>
+        <div class="plankton" style="left: 25%; top: 200px; animation-delay: 1s;"></div>
+        <div class="plankton" style="left: 60%; top: 120px; animation-delay: 3s;"></div>
+        <div class="plankton" style="left: 85%; top: 180px; animation-delay: 5s;"></div>
         
       </div>
     </body>
   </foreignObject>
-  
 </svg>
