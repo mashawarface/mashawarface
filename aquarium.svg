@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="400" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <style type="text/css">
+      <![CDATA[
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+        
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: 'Comic Neue', cursive;
+          overflow: hidden;
+          width: 800px;
+          height: 400px;
+          background: linear-gradient(to bottom, #1e90ff 0%, #87ceeb 40%, #00bfff 100%);
+          position: relative;
+        }
+        
+        /* Аквариум */
+        .aquarium {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Поверхность воды */
+        .water-surface {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 20px;
+          background: rgba(135, 206, 235, 0.6);
+          animation: water-ripple 4s infinite ease-in-out;
+        }
+        
+        @keyframes water-ripple {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(5px); }
+        }
+        
+        /* Рыбки */
+        .fish {
+          position: absolute;
+          filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
+        }
+        
+        /* Тело рыбки */
+        .fish-body {
+          position: relative;
+          border-radius: 50% 40% 40% 50%;
+        }
+        
+        /* Хвост */
+        .fish-tail {
+          position: absolute;
+          right: -10px;
+          top: 50%;
+          transform: translateY(-50%);
+          border-radius: 50%;
+          animation: tail-wag 0.5s infinite alternate;
+        }
+        
+        @keyframes tail-wag {
+          0% { transform: translateY(-50%) scaleX(1); }
+          100% { transform: translateY(-50%) scaleX(0.8); }
+        }
+        
+        /* Глаз */
+        .fish-eye {
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          background: white;
+          border-radius: 50%;
+          top: 30%;
+          left: 15%;
+        }
+        
+        .fish-eye::after {
+          content: '';
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background: black;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        
+        /* Типы рыбок */
+        .clownfish {
+          width: 70px;
+          height: 30px;
+          background: linear-gradient(to right, #FF6B35, #FFA500);
+        }
+        
+        .clownfish .fish-tail {
+          width: 15px;
+          height: 20px;
+          background: #FF4500;
+        }
+        
+        .bluefish {
+          width: 60px;
+          height: 25px;
+          background: linear-gradient(to right, #1E90FF, #00BFFF);
+        }
+        
+        .bluefish .fish-tail {
+          width: 12px;
+          height: 18px;
+          background: #1C86EE;
+        }
+        
+        .goldfish {
+          width: 50px;
+          height: 22px;
+          background: linear-gradient(to right, #FFD700, #FFA500);
+        }
+        
+        .goldfish .fish-tail {
+          width: 10px;
+          height: 16px;
+          background: #FF8C00;
+        }
+        
+        /* Анимации плавания */
+        @keyframes swim1 {
+          0% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(200px, 50px) rotate(15deg); }
+          50% { transform: translate(400px, -30px) rotate(-10deg); }
+          75% { transform: translate(600px, 40px) rotate(20deg); }
+          100% { transform: translate(800px, 0) rotate(0deg); }
+        }
+        
+        @keyframes swim2 {
+          0% { transform: translate(800px, 100px) rotate(180deg); }
+          25% { transform: translate(600px, 150px) rotate(165deg); }
+          50% { transform: translate(400px, 70px) rotate(190deg); }
+          75% { transform: translate(200px, 160px) rotate(160deg); }
+          100% { transform: translate(0, 100px) rotate(180deg); }
+        }
+        
+        @keyframes swim3 {
+          0% { transform: translate(0, 250px) rotate(0deg); }
+          33% { transform: translate(300px, 200px) rotate(10deg); }
+          66% { transform: translate(500px, 280px) rotate(-5deg); }
+          100% { transform: translate(800px, 250px) rotate(0deg); }
+        }
+        
+        @keyframes swim4 {
+          0% { transform: translate(800px, 300px) rotate(180deg); }
+          33% { transform: translate(500px, 250px) rotate(190deg); }
+          66% { transform: translate(300px, 320px) rotate(175deg); }
+          100% { transform: translate(0, 300px) rotate(180deg); }
+        }
+        
+        @keyframes swim5 {
+          0% { transform: translate(200px, 180px) rotate(0deg); }
+          50% { transform: translate(600px, 180px) rotate(0deg); }
+          100% { transform: translate(200px, 180px) rotate(0deg); }
+        }
+        
+        /* Применение анимаций к рыбкам */
+        .fish1 { animation: swim1 15s infinite linear; }
+        .fish2 { animation: swim2 18s infinite linear; }
+        .fish3 { animation: swim3 20s infinite linear; }
+        .fish4 { animation: swim4 22s infinite linear; }
+        .fish5 { animation: swim5 12s infinite linear alternate; }
+        
+        /* Декорации */
+        .plant {
+          position: absolute;
+          bottom: 0;
+          border-radius: 5px 5px 0 0;
+        }
+        
+        .plant1 {
+          left: 10%;
+          width: 15px;
+          height: 120px;
+          background: linear-gradient(to top, #3CB371, #2E8B57);
+          animation: plant-sway 4s infinite ease-in-out;
+        }
+        
+        .plant2 {
+          left: 30%;
+          width: 20px;
+          height: 150px;
+          background: linear-gradient(to top, #66CDAA, #20B2AA);
+          animation: plant-sway 3s infinite ease-in-out;
+          animation-delay: 0.5s;
+        }
+        
+        .plant3 {
+          right: 20%;
+          width: 12px;
+          height: 130px;
+          background: linear-gradient(to top, #90EE90, #32CD32);
+          animation: plant-sway 5s infinite ease-in-out;
+          animation-delay: 1s;
+        }
+        
+        @keyframes plant-sway {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(5px); }
+        }
+        
+        .rock {
+          position: absolute;
+          bottom: 0;
+          border-radius: 10px 10px 0 0;
+        }
+        
+        .rock1 {
+          left: 20%;
+          width: 70px;
+          height: 50px;
+          background: linear-gradient(to top, #A9A9A9, #696969);
+        }
+        
+        .rock2 {
+          right: 10%;
+          width: 90px;
+          height: 60px;
+          background: linear-gradient(to top, #C0C0C0, #808080);
+        }
+        
+        .treasure {
+          position: absolute;
+          bottom: 0;
+          right: 30%;
+          width: 35px;
+          height: 25px;
+          background: linear-gradient(45deg, #FFD700, #FFA500);
+          border-radius: 5px;
+        }
+        
+        .treasure::after {
+          content: '';
+          position: absolute;
+          top: -12px;
+          left: 12px;
+          width: 8px;
+          height: 12px;
+          background: #FFA500;
+          border-radius: 3px;
+        }
+        
+        /* Пузырьки */
+        .bubble {
+          position: absolute;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          animation: bubble-rise linear infinite;
+        }
+        
+        @keyframes bubble-rise {
+          0% {
+            transform: translateY(0) scale(0.5);
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateY(-400px) scale(1.2);
+            opacity: 0;
+          }
+        }
+        
+        /* Заголовок */
+        .title {
+          position: absolute;
+          top: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-family: 'Fredoka One', cursive;
+          font-size: 24px;
+          color: white;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.3);
+          padding: 8px 20px;
+          border-radius: 20px;
+          z-index: 10;
+          animation: title-glow 3s infinite alternate;
+        }
+        
+        @keyframes title-glow {
+          0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+          100% { box-shadow: 0 0 20px rgba(30, 144, 255, 0.8); }
+        }
+        
+        /* Подпись */
+        .signature {
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.8);
+          background: rgba(0, 0, 0, 0.2);
+          padding: 5px 15px;
+          border-radius: 10px;
+        }
+        
+        /* Адаптация для темной темы */
+        @media (prefers-color-scheme: dark) {
+          body {
+            background: linear-gradient(to bottom, #0c2461 0%, #1e3799 40%, #0a3d62 100%);
+          }
+          
+          .title {
+            color: #4dffea;
+          }
+        }
+        
+        /* Адаптация для пользователей с уменьшенной анимацией */
+        @media (prefers-reduced-motion: reduce) {
+          .fish, .plant, .bubble, .title {
+            animation: none !important;
+          }
+        }
+      ]]>
+    </style>
+  </defs>
+  
+  <foreignObject width="800" height="400" x="0" y="0">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <div class="aquarium">
+        <!-- Поверхность воды -->
+        <div class="water-surface"></div>
+        
+        <!-- Заголовок -->
+        <div class="title">🐠 Мой виртуальный аквариум 🐠</div>
+        
+        <!-- Рыбки -->
+        <div class="fish fish1">
+          <div class="fish-body clownfish">
+            <div class="fish-eye"></div>
+          </div>
+          <div class="fish-tail"></div>
+        </div>
+        
+        <div class="fish fish2">
+          <div class="fish-body bluefish">
+            <div class="fish-eye"></div>
+          </div>
+          <div class="fish-tail"></div>
+        </div>
+        
+        <div class="fish fish3">
+          <div class="fish-body goldfish">
+            <div class="fish-eye"></div>
+          </div>
+          <div class="fish-tail"></div>
+        </div>
+        
+        <div class="fish fish4">
+          <div class="fish-body clownfish">
+            <div class="fish-eye"></div>
+          </div>
+          <div class="fish-tail"></div>
+        </div>
+        
+        <div class="fish fish5">
+          <div class="fish-body bluefish">
+            <div class="fish-eye"></div>
+          </div>
+          <div class="fish-tail"></div>
+        </div>
+        
+        <!-- Декорации -->
+        <div class="plant plant1"></div>
+        <div class="plant plant2"></div>
+        <div class="plant plant3"></div>
+        <div class="rock rock1"></div>
+        <div class="rock rock2"></div>
+        <div class="treasure"></div>
+        
+        <!-- Пузырьки -->
+        <div class="bubble" style="left: 15%; animation-duration: 6s; width: 12px; height: 12px;"></div>
+        <div class="bubble" style="left: 25%; animation-duration: 8s; width: 8px; height: 8px; animation-delay: 1s;"></div>
+        <div class="bubble" style="left: 40%; animation-duration: 7s; width: 15px; height: 15px; animation-delay: 2s;"></div>
+        <div class="bubble" style="left: 60%; animation-duration: 9s; width: 10px; height: 10px; animation-delay: 0.5s;"></div>
+        <div class="bubble" style="left: 75%; animation-duration: 5s; width: 6px; height: 6px; animation-delay: 3s;"></div>
+        <div class="bubble" style="left: 85%; animation-duration: 7s; width: 13px; height: 13px; animation-delay: 1.5s;"></div>
+        
+        <!-- Подпись -->
+        <div class="signature">Обновляется при каждом обновлении страницы! ✨</div>
+      </div>
+    </body>
+  </foreignObject>
+  
+  <!-- Альтернативный текст для SVG -->
+  <text x="-1000" y="-1000">Анимированный аквариум с плавающими рыбками. Для просмотра анимации обновите страницу.</text>
+</svg>
