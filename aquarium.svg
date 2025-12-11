@@ -25,7 +25,7 @@
           position: relative;
         }
         
-        /* Аквариум с градиентом глубины */
+        /* Аквариум */
         .aquarium {
           width: 100%;
           height: 100%;
@@ -55,7 +55,7 @@
           100% { transform: translateY(400px); }
         }
         
-        /* Поверхность воды с пеной */
+        /* Поверхность воды */
         .water-surface {
           position: absolute;
           top: 0;
@@ -71,7 +71,7 @@
           animation: water-ripple 5s infinite ease-in-out;
         }
         
-        /* Рыбки */
+        /* ========== РЫБКИ С ГЛАЗАМИ И ПЛАВНИКАМИ ========== */
         .fish {
           position: absolute;
           filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
@@ -83,9 +83,10 @@
           border-radius: 50% 40% 40% 50%;
         }
         
+        /* Хвост */
         .fish-tail {
           position: absolute;
-          right: -10px;
+          right: -12px;
           top: 50%;
           transform: translateY(-50%);
           border-radius: 50%;
@@ -96,6 +97,59 @@
           0% { transform: translateY(-50%) scaleX(1) rotate(0deg); }
           100% { transform: translateY(-50%) scaleX(0.7) rotate(5deg); }
         }
+        
+        /* Верхний плавник */
+        .fish-fin-top {
+          position: absolute;
+          top: -8px;
+          left: 30%;
+          width: 5px;
+          height: 15px;
+          border-radius: 50% 50% 0 0;
+          animation: fin-wave 1s infinite alternate;
+        }
+        
+        @keyframes fin-wave {
+          0% { transform: translateY(0) rotate(0deg); }
+          100% { transform: translateY(-3px) rotate(5deg); }
+        }
+        
+        /* Нижний плавник */
+        .fish-fin-bottom {
+          position: absolute;
+          bottom: -6px;
+          left: 40%;
+          width: 4px;
+          height: 12px;
+          border-radius: 0 0 50% 50%;
+          animation: fin-wave 1.2s infinite alternate;
+        }
+        
+        /* Глаза */
+        .fish-eye {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: white;
+          border-radius: 50%;
+          top: 35%;
+          border: 1px solid #333;
+        }
+        
+        .fish-eye::after {
+          content: '';
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          background: #222;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        
+        .fish-eye.left { left: 18%; }
+        .fish-eye.right { left: 28%; }
         
         /* Типы рыбок */
         .clownfish {
@@ -117,6 +171,14 @@
           background: linear-gradient(to right, #FF4500, #FF8C00);
         }
         
+        .clownfish .fish-fin-top {
+          background: linear-gradient(to bottom, #FF8C00, #FF4500);
+        }
+        
+        .clownfish .fish-fin-bottom {
+          background: linear-gradient(to top, #FF8C00, #FF4500);
+        }
+        
         .bluefish {
           width: 65px;
           height: 28px;
@@ -129,6 +191,14 @@
           width: 14px;
           height: 20px;
           background: linear-gradient(to right, #1C86EE, #00BFFF);
+        }
+        
+        .bluefish .fish-fin-top {
+          background: linear-gradient(to bottom, #1C86EE, #00BFFF);
+        }
+        
+        .bluefish .fish-fin-bottom {
+          background: linear-gradient(to top, #1C86EE, #00BFFF);
         }
         
         .goldfish {
@@ -145,29 +215,35 @@
           background: linear-gradient(to right, #FF8C00, #FFA500);
         }
         
-        /* Осьминог */
-        .octopus {
+        .goldfish .fish-fin-top {
+          background: linear-gradient(to bottom, #FFA500, #FF8C00);
+        }
+        
+        .goldfish .fish-fin-bottom {
+          background: linear-gradient(to top, #FFA500, #FF8C00);
+        }
+        
+        /* ========== ОСЬМИНОГ С РАЗДЕЛЬНЫМИ ЩУПАЛЬЦАМИ ========== */
+        .octopus-container {
           position: absolute;
           bottom: 20px;
           left: 100px;
-          width: 80px;
-          height: 80px;
-          background: radial-gradient(circle at 40% 40%, #9370DB, #8A2BE2);
-          border-radius: 50% 50% 50% 50%;
+          width: 100px;
+          height: 120px;
           z-index: 3;
-          filter: drop-shadow(3px 5px 8px rgba(0, 0, 0, 0.4));
         }
         
         .octopus-head {
           position: absolute;
-          width: 100%;
-          height: 60%;
+          width: 70px;
+          height: 60px;
           background: 
-            radial-gradient(circle at 30% 30%, #BA55D3, #9370DB);
-          border-radius: 50%;
+            radial-gradient(circle at 40% 40%, #9370DB, #8A2BE2);
+          border-radius: 50% 50% 50% 50%;
           top: 0;
-          left: 0;
+          left: 15px;
           animation: octopus-breathe 4s infinite ease-in-out;
+          filter: drop-shadow(3px 5px 8px rgba(0, 0, 0, 0.4));
         }
         
         @keyframes octopus-breathe {
@@ -177,19 +253,19 @@
         
         .octopus-eye {
           position: absolute;
-          width: 12px;
-          height: 12px;
+          width: 10px;
+          height: 10px;
           background: white;
           border-radius: 50%;
-          top: 25px;
+          top: 20px;
           border: 2px solid #4B0082;
         }
         
         .octopus-eye::after {
           content: '';
           position: absolute;
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           background: #4B0082;
           border-radius: 50%;
           top: 50%;
@@ -203,32 +279,58 @@
           100% { transform: translate(-30%, -50%); }
         }
         
-        .octopus-eye.left { left: 20px; }
-        .octopus-eye.right { right: 20px; }
+        .octopus-eye.left { left: 15px; }
+        .octopus-eye.right { right: 15px; }
         
+        /* Щупальца - каждое отдельно */
         .octopus-tentacle {
           position: absolute;
-          bottom: 0;
           background: linear-gradient(to top, #8A2BE2, #9370DB);
-          border-radius: 10px 10px 0 0;
-          animation: tentacle-wave 3s infinite ease-in-out;
+          border-radius: 8px 8px 0 0;
+          bottom: 0;
+          animation: tentacle-wave 4s infinite ease-in-out;
+          transform-origin: bottom center;
         }
         
         @keyframes tentacle-wave {
-          0%, 100% { transform: translateX(0); height: 30px; }
-          25% { transform: translateX(-5px); height: 35px; }
-          50% { transform: translateX(5px); height: 32px; }
-          75% { transform: translateX(-3px); height: 38px; }
+          0%, 100% { 
+            transform: translateY(0) scaleY(1); 
+            height: 40px;
+          }
+          25% { 
+            transform: translateY(-5px) scaleY(1.1); 
+            height: 45px;
+          }
+          50% { 
+            transform: translateY(0) scaleY(0.95); 
+            height: 42px;
+          }
+          75% { 
+            transform: translateY(3px) scaleY(1.05); 
+            height: 47px;
+          }
         }
         
-        .tentacle1 { left: 10px; width: 10px; height: 30px; animation-delay: 0s; }
-        .tentacle2 { left: 25px; width: 8px; height: 35px; animation-delay: 0.2s; }
-        .tentacle3 { left: 38px; width: 9px; height: 32px; animation-delay: 0.4s; }
-        .tentacle4 { left: 52px; width: 7px; height: 38px; animation-delay: 0.6s; }
-        .tentacle5 { right: 52px; width: 7px; height: 36px; animation-delay: 0.8s; }
-        .tentacle6 { right: 38px; width: 9px; height: 33px; animation-delay: 1s; }
-        .tentacle7 { right: 25px; width: 8px; height: 37px; animation-delay: 1.2s; }
-        .tentacle8 { right: 10px; width: 10px; height: 31px; animation-delay: 1.4s; }
+        /* Позиции щупалец */
+        .tentacle1 { left: 10px; width: 8px; height: 40px; animation-delay: 0s; }
+        .tentacle2 { left: 22px; width: 7px; height: 45px; animation-delay: 0.3s; }
+        .tentacle3 { left: 33px; width: 9px; height: 42px; animation-delay: 0.6s; }
+        .tentacle4 { left: 46px; width: 6px; height: 47px; animation-delay: 0.9s; }
+        .tentacle5 { right: 46px; width: 6px; height: 43px; animation-delay: 1.2s; }
+        .tentacle6 { right: 33px; width: 9px; height: 46px; animation-delay: 1.5s; }
+        .tentacle7 { right: 22px; width: 7px; height: 41px; animation-delay: 1.8s; }
+        .tentacle8 { right: 10px; width: 8px; height: 44px; animation-delay: 2.1s; }
+        
+        /* Присоски на щупальцах */
+        .tentacle-sucker {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          left: 50%;
+          transform: translateX(-50%);
+        }
         
         /* Краб */
         .crab {
@@ -252,13 +354,25 @@
           100% { transform: translateX(0) rotate(0deg); }
         }
         
+        .crab-eye {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          background: white;
+          border-radius: 50%;
+          top: 5px;
+        }
+        
+        .crab-eye.left { left: 10px; }
+        .crab-eye.right { right: 10px; }
+        
         .crab-claw {
           position: absolute;
-          width: 15px;
-          height: 10px;
+          width: 12px;
+          height: 8px;
           background: #B22222;
           border-radius: 50% 50% 0 0;
-          top: -5px;
+          top: -4px;
           animation: claw-pinch 2s infinite;
         }
         
@@ -267,28 +381,35 @@
           50% { transform: scale(1.1); }
         }
         
-        .claw-left { left: -10px; transform-origin: right center; }
-        .claw-right { right: -10px; transform-origin: left center; }
+        .claw-left { 
+          left: -8px; 
+          transform-origin: right center;
+        }
+        
+        .claw-right { 
+          right: -8px; 
+          transform-origin: left center;
+        }
         
         .crab-leg {
           position: absolute;
-          width: 5px;
-          height: 15px;
+          width: 4px;
+          height: 12px;
           background: #B22222;
           border-radius: 2px;
-          bottom: -10px;
+          bottom: -8px;
           animation: leg-move 1s infinite alternate;
         }
         
         @keyframes leg-move {
           0% { transform: translateY(0); }
-          100% { transform: translateY(-5px); }
+          100% { transform: translateY(-4px); }
         }
         
-        .leg1 { left: 5px; animation-delay: 0s; }
-        .leg2 { left: 15px; animation-delay: 0.2s; }
-        .leg3 { right: 15px; animation-delay: 0.4s; }
-        .leg4 { right: 5px; animation-delay: 0.6s; }
+        .leg1 { left: 6px; animation-delay: 0s; }
+        .leg2 { left: 14px; animation-delay: 0.2s; }
+        .leg3 { right: 14px; animation-delay: 0.4s; }
+        .leg4 { right: 6px; animation-delay: 0.6s; }
         
         /* Кораллы */
         .coral {
@@ -364,7 +485,7 @@
           66% { transform: translateX(-5px) skewY(-2deg); }
         }
         
-        /* Больше водорослей */
+        /* Водоросли */
         .seaweed {
           position: absolute;
           bottom: 0;
@@ -416,7 +537,7 @@
           );
         }
         
-        /* Камни и грунт */
+        /* Камни */
         .rock {
           position: absolute;
           bottom: 0;
@@ -457,7 +578,7 @@
             inset -3px -3px 8px rgba(0, 0, 0, 0.3);
         }
         
-        /* Сундук с сокровищами */
+        /* Сундук */
         .treasure {
           position: absolute;
           bottom: 5px;
@@ -509,7 +630,7 @@
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
-        /* Монетки рядом с сундуком */
+        /* Монетки */
         .coin {
           position: absolute;
           width: 8px;
@@ -532,7 +653,7 @@
         .coin3 { right: 36%; animation-delay: 1s; }
         .coin4 { right: 38%; bottom: 15px; animation-delay: 1.5s; }
         
-        /* Пузырьки разных размеров */
+        /* Пузырьки */
         .bubble {
           position: absolute;
           background: 
@@ -565,7 +686,7 @@
           }
         }
         
-        /* Планктон (мелкие частицы) */
+        /* Планктон */
         .plankton {
           position: absolute;
           width: 3px;
@@ -592,7 +713,7 @@
           }
         }
         
-        /* Анимации плавания для рыбок */
+        /* Анимации плавания */
         @keyframes swim-diagonal {
           0% { transform: translate(0, 0) rotate(0deg); }
           25% { transform: translate(180px, 80px) rotate(15deg); }
@@ -641,7 +762,7 @@
         .fish4 { animation: swim-circle 40s infinite linear; }
         .fish5 { animation: swim-zigzag 45s infinite linear; }
         
-        /* Адаптация для темной темы */
+        /* Темная тема */
         @media (prefers-color-scheme: dark) {
           body {
             background: linear-gradient(to bottom, 
@@ -657,15 +778,9 @@
               linear-gradient(45deg, transparent 30%, rgba(100, 150, 255, 0.08) 50%, transparent 70%),
               linear-gradient(-45deg, transparent 30%, rgba(100, 150, 255, 0.05) 50%, transparent 70%);
           }
-          
-          .clownfish, .bluefish, .goldfish {
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)) 
-                   brightness(1.1) 
-                   drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
-          }
         }
         
-        /* Доступность - отключение анимаций */
+        /* Доступность */
         @media (prefers-reduced-motion: reduce) {
           *, ::before, ::after {
             animation: none !important;
@@ -689,50 +804,109 @@
         <!-- Поверхность воды -->
         <div class="water-surface"></div>
         
-        <!-- Рыбки -->
+        <!-- Рыбки с глазами и плавниками -->
         <div class="fish fish1">
-          <div class="fish-body clownfish"></div>
+          <div class="fish-body clownfish">
+            <div class="fish-eye left"></div>
+            <div class="fish-eye right"></div>
+            <div class="fish-fin-top"></div>
+            <div class="fish-fin-bottom"></div>
+          </div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish2">
-          <div class="fish-body bluefish"></div>
+          <div class="fish-body bluefish">
+            <div class="fish-eye left"></div>
+            <div class="fish-eye right"></div>
+            <div class="fish-fin-top"></div>
+            <div class="fish-fin-bottom"></div>
+          </div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish3">
-          <div class="fish-body goldfish"></div>
+          <div class="fish-body goldfish">
+            <div class="fish-eye left"></div>
+            <div class="fish-eye right"></div>
+            <div class="fish-fin-top"></div>
+            <div class="fish-fin-bottom"></div>
+          </div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish4">
-          <div class="fish-body clownfish"></div>
+          <div class="fish-body clownfish">
+            <div class="fish-eye left"></div>
+            <div class="fish-eye right"></div>
+            <div class="fish-fin-top"></div>
+            <div class="fish-fin-bottom"></div>
+          </div>
           <div class="fish-tail"></div>
         </div>
         
         <div class="fish fish5">
-          <div class="fish-body bluefish"></div>
+          <div class="fish-body bluefish">
+            <div class="fish-eye left"></div>
+            <div class="fish-eye right"></div>
+            <div class="fish-fin-top"></div>
+            <div class="fish-fin-bottom"></div>
+          </div>
           <div class="fish-tail"></div>
         </div>
         
-        <!-- Осьминог -->
-        <div class="octopus">
+        <!-- Осьминог с раздельными щупальцами -->
+        <div class="octopus-container">
           <div class="octopus-head">
             <div class="octopus-eye left"></div>
             <div class="octopus-eye right"></div>
           </div>
-          <div class="octopus-tentacle tentacle1"></div>
-          <div class="octopus-tentacle tentacle2"></div>
-          <div class="octopus-tentacle tentacle3"></div>
-          <div class="octopus-tentacle tentacle4"></div>
-          <div class="octopus-tentacle tentacle5"></div>
-          <div class="octopus-tentacle tentacle6"></div>
-          <div class="octopus-tentacle tentacle7"></div>
-          <div class="octopus-tentacle tentacle8"></div>
+          <div class="octopus-tentacle tentacle1">
+            <div class="tentacle-sucker" style="top: 10px;"></div>
+            <div class="tentacle-sucker" style="top: 20px;"></div>
+            <div class="tentacle-sucker" style="top: 30px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle2">
+            <div class="tentacle-sucker" style="top: 8px;"></div>
+            <div class="tentacle-sucker" style="top: 18px;"></div>
+            <div class="tentacle-sucker" style="top: 28px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle3">
+            <div class="tentacle-sucker" style="top: 12px;"></div>
+            <div class="tentacle-sucker" style="top: 22px;"></div>
+            <div class="tentacle-sucker" style="top: 32px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle4">
+            <div class="tentacle-sucker" style="top: 7px;"></div>
+            <div class="tentacle-sucker" style="top: 17px;"></div>
+            <div class="tentacle-sucker" style="top: 27px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle5">
+            <div class="tentacle-sucker" style="top: 9px;"></div>
+            <div class="tentacle-sucker" style="top: 19px;"></div>
+            <div class="tentacle-sucker" style="top: 29px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle6">
+            <div class="tentacle-sucker" style="top: 11px;"></div>
+            <div class="tentacle-sucker" style="top: 21px;"></div>
+            <div class="tentacle-sucker" style="top: 31px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle7">
+            <div class="tentacle-sucker" style="top: 6px;"></div>
+            <div class="tentacle-sucker" style="top: 16px;"></div>
+            <div class="tentacle-sucker" style="top: 26px;"></div>
+          </div>
+          <div class="octopus-tentacle tentacle8">
+            <div class="tentacle-sucker" style="top: 13px;"></div>
+            <div class="tentacle-sucker" style="top: 23px;"></div>
+            <div class="tentacle-sucker" style="top: 33px;"></div>
+          </div>
         </div>
         
         <!-- Краб -->
         <div class="crab">
+          <div class="crab-eye left"></div>
+          <div class="crab-eye right"></div>
           <div class="crab-claw claw-left"></div>
           <div class="crab-claw claw-right"></div>
           <div class="crab-leg leg1"></div>
@@ -755,7 +929,7 @@
         <div class="rock rock1"></div>
         <div class="rock rock2"></div>
         
-        <!-- Сундук с сокровищами -->
+        <!-- Сундук -->
         <div class="treasure">
           <div class="treasure-lid"></div>
         </div>
@@ -767,21 +941,17 @@
         <div class="coin coin4"></div>
         
         <!-- Пузырьки -->
-        <div class="bubble" style="left: 10%; animation-duration: 8s; width: 18px; height: 18px; animation-delay: 0s;"></div>
+        <div class="bubble" style="left: 10%; animation-duration: 8s; width: 18px; height: 18px;"></div>
         <div class="bubble" style="left: 20%; animation-duration: 6s; width: 12px; height: 12px; animation-delay: 1s;"></div>
         <div class="bubble" style="left: 35%; animation-duration: 10s; width: 25px; height: 25px; animation-delay: 2s;"></div>
         <div class="bubble" style="left: 50%; animation-duration: 7s; width: 15px; height: 15px; animation-delay: 0.5s;"></div>
         <div class="bubble" style="left: 65%; animation-duration: 9s; width: 20px; height: 20px; animation-delay: 3s;"></div>
         <div class="bubble" style="left: 80%; animation-duration: 5s; width: 10px; height: 10px; animation-delay: 1.5s;"></div>
-        <div class="bubble" style="left: 90%; animation-duration: 11s; width: 22px; height: 22px; animation-delay: 2.5s;"></div>
         
         <!-- Планктон -->
-        <div class="plankton" style="left: 15%; top: 100px; animation-delay: 0s;"></div>
+        <div class="plankton" style="left: 15%; top: 100px;"></div>
         <div class="plankton" style="left: 45%; top: 150px; animation-delay: 2s;"></div>
         <div class="plankton" style="left: 75%; top: 80px; animation-delay: 4s;"></div>
-        <div class="plankton" style="left: 25%; top: 200px; animation-delay: 1s;"></div>
-        <div class="plankton" style="left: 60%; top: 120px; animation-delay: 3s;"></div>
-        <div class="plankton" style="left: 85%; top: 180px; animation-delay: 5s;"></div>
         
       </div>
     </body>
